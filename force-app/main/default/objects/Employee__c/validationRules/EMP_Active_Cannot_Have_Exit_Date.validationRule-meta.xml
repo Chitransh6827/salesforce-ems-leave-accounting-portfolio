@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EMP_Active_Cannot_Have_Exit_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    OR(
+        ISPICKVAL(Status__c, &quot;Pre-Joining&quot;),
+        ISPICKVAL(Status__c, &quot;Active&quot;),
+        ISPICKVAL(Status__c, &quot;On Leave&quot;)
+    ),
+    NOT(ISBLANK(Exit_Date__c)),
+    ISBLANK(TEXT(Exit_Reason__c))
+)</errorConditionFormula>
+    <errorDisplayField>Exit_Date__c</errorDisplayField>
+    <errorMessage>Exit Reason is required when an Exit Date is entered.</errorMessage>
+</ValidationRule>

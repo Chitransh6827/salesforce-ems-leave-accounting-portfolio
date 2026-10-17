@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PAY_Other_Deductions_Negative</fullName>
+    <active>true</active>
+    <errorConditionFormula>Other_Deductions__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>Other_Deductions__c</errorDisplayField>
+    <errorMessage>Other Deductions cannot be negative</errorMessage>
+</ValidationRule>

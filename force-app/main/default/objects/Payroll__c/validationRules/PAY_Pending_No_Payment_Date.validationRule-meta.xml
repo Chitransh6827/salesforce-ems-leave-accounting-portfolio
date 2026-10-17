@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PAY_Pending_No_Payment_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Payment_Status__c,&quot;Pending&quot;),
+    NOT(ISBLANK(Payment_Date__c))
+)</errorConditionFormula>
+    <errorMessage>Pending payroll cannot have a Payment Date.</errorMessage>
+</ValidationRule>

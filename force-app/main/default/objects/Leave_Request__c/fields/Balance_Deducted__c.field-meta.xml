@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Balance_Deducted__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether this approved leave request has already been deducted from the employee&apos;s leave balance.</description>
+    <label>Balance Deducted</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

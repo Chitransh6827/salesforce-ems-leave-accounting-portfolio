@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Related_Debit_Event__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Related Debit Event</label>
+    <referenceTo>Leave_Accounting_Event__c</referenceTo>
+    <relationshipLabel>Restorations</relationshipLabel>
+    <relationshipName>Restorations</relationshipName>
+    <type>Lookup</type>
+</CustomField>

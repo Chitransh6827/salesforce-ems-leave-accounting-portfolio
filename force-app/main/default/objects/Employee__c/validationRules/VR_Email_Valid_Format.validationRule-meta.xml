@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Email_Valid_Format</fullName>
+    <active>true</active>
+    <description>Ensures email address is in a valid format with proper structure (example: user@domain.com
+).</description>
+    <errorConditionFormula>NOT(REGEX(Email__c, &quot;^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$&quot;))</errorConditionFormula>
+    <errorDisplayField>Email__c</errorDisplayField>
+    <errorMessage>Enter a valid email address (example: name@example.com
+).</errorMessage>
+</ValidationRule>

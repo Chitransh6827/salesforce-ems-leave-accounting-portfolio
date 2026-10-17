@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PR_Finalized_Strengths_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Review_Status__c,&quot;Finalized&quot;),
+    ISBLANK(Strengths__c)
+)</errorConditionFormula>
+    <errorDisplayField>Strengths__c</errorDisplayField>
+    <errorMessage>Strengths must be provided before finalizing the review.</errorMessage>
+</ValidationRule>

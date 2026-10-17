@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PR_End_Date_Before_Start_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Review_Period_Start__c)),
+    NOT(ISBLANK(Review_Period_End__c)),
+    Review_Period_End__c &lt; Review_Period_Start__c
+)</errorConditionFormula>
+    <errorDisplayField>Review_Period_End__c</errorDisplayField>
+    <errorMessage>Review Period End cannot be earlier than Review Period Start.</errorMessage>
+</ValidationRule>

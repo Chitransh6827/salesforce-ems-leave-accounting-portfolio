@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EMP_Future_Joining_Status</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Joining_Date__c)),
+    Joining_Date__c &gt; TODAY(),
+    NOT(ISPICKVAL(Status__c, &quot;Pre-Joining&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>Joining_Date__c</errorDisplayField>
+    <errorMessage>Employees with a future joining date must have Pre-Joining status.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EMP_Exit_Before_Joining</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Joining_Date__c)),
+    NOT(ISBLANK(Exit_Date__c)),
+    Exit_Date__c &lt; Joining_Date__c
+)</errorConditionFormula>
+    <errorDisplayField>Exit_Date__c</errorDisplayField>
+    <errorMessage>Exit date cannot be earlier than joining date.</errorMessage>
+</ValidationRule>

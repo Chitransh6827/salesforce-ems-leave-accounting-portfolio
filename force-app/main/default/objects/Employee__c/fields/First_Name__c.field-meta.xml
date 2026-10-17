@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>First_Name__c</fullName>
+    <description>Enter Employee first name</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please enter you name without any abbreviations.</inlineHelpText>
+    <label>First Name</label>
+    <length>50</length>
+    <required>true</required>
+    <securityClassification>Public</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

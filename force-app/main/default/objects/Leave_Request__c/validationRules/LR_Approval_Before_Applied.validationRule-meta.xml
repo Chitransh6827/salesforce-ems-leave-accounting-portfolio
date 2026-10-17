@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LR_Approval_Before_Applied</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Applied_Date__c)),
+    NOT(ISBLANK(Approval_Date__c)),
+    Approval_Date__c &lt; Applied_Date__c
+)</errorConditionFormula>
+    <errorMessage>Approval Date cannot be before Applied Date.</errorMessage>
+</ValidationRule>

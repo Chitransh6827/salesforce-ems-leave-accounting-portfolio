@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ATD_No_Time_For_Absent_Leave</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    OR(
+        ISPICKVAL(Status__c,&quot;Absent&quot;),
+        ISPICKVAL(Status__c,&quot;Leave&quot;)
+    ),
+    OR(
+        NOT(ISBLANK(Check_in_Time__c)),
+        NOT(ISBLANK(Check_out_Time__c))
+    )
+)</errorConditionFormula>
+    <errorMessage>Employees marked Absent or Leave cannot have check-in or check-out times.</errorMessage>
+</ValidationRule>

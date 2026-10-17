@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HOL_Min_Len</fullName>
+    <active>true</active>
+    <errorConditionFormula>LEN(TRIM(Name)) &lt; 2</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Holiday Name must contain at least 2 characters.</errorMessage>
+</ValidationRule>

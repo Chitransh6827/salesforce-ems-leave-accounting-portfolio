@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EMP_Minimum_Age_At_Joining</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Date_of_Birth__c)),
+    NOT(ISBLANK(Joining_Date__c)),
+    ADDMONTHS(Date_of_Birth__c, 216) &gt; Joining_Date__c
+)</errorConditionFormula>
+    <errorMessage>Employee must be at least 18 years old on the joining date.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LR_Max_Leave_Duration</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Start_Date__c)),
+    NOT(ISBLANK(End_Date__c)),
+    (End_Date__c - Start_Date__c + 1) &gt; 365
+)</errorConditionFormula>
+    <errorMessage>Leave duration cannot exceed 365 days.</errorMessage>
+</ValidationRule>

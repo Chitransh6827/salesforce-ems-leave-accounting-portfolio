@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Payroll_Exists</name>
+        <label>Payroll Exists</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Create_Monthly_Payroll</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Payroll Not Found</defaultConnectorLabel>
+        <rules>
+            <name>Payroll_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Existing_Payroll.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Active_Employees</targetReference>
+            </connector>
+            <label>Payroll Found</label>
+        </rules>
+    </decisions>
+    <description>Automatically creates monthly payroll records for active employees and prevents duplicate payroll generation.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>Current_Payroll_Month</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    MONTH(TODAY()),
+    1, &quot;January&quot;,
+    2, &quot;February&quot;,
+    3, &quot;March&quot;,
+    4, &quot;April&quot;,
+    5, &quot;May&quot;,
+    6, &quot;June&quot;,
+    7, &quot;July&quot;,
+    8, &quot;August&quot;,
+    9, &quot;September&quot;,
+    10, &quot;October&quot;,
+    11, &quot;November&quot;,
+    12, &quot;December&quot;,
+    &quot;January&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>Payroll_Allowances</name>
+        <dataType>Currency</dataType>
+        <expression>{!Loop_Through_Active_Employees.Salary__c} * 0.10</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Payroll_Bonus</name>
+        <dataType>Currency</dataType>
+        <expression>IF(
+    {!Loop_Through_Active_Employees.Bonus_Eligible__c},
+    {!Loop_Through_Active_Employees.Salary__c} * 0.05,
+    0
+)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Payroll_Date</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <formulas>
+        <name>Payroll_Gross</name>
+        <dataType>Currency</dataType>
+        <expression>{!Loop_Through_Active_Employees.Salary__c}
++
+{!Payroll_HRA}
++
+{!Payroll_Allowances}
++
+{!Payroll_Bonus}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Payroll_HRA</name>
+        <dataType>Currency</dataType>
+        <expression>{!Loop_Through_Active_Employees.Salary__c} * 0.20</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Payroll_Month_Number</name>
+        <dataType>Number</dataType>
+        <expression>MONTH(TODAY())</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>Payroll_PF</name>
+        <dataType>Currency</dataType>
+        <expression>{!Loop_Through_Active_Employees.Salary__c} * 0.12</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Payroll_Tax</name>
+        <dataType>Currency</dataType>
+        <expression>{!Payroll_Gross} * 0.10</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Payroll_Year</name>
+        <dataType>Number</dataType>
+        <expression>YEAR(TODAY())</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Auto Create Monthly Payroll {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Auto Create Monthly Payroll</label>
+    <loops>
+        <name>Loop_Through_Active_Employees</name>
+        <label>Loop Through Active Employees</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Active_Employees</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_Existing_Payroll</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Monthly_Payroll</name>
+        <label>Create Monthly Payroll</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Loop_Through_Active_Employees</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Allowances__c</field>
+            <value>
+                <elementReference>Payroll_Allowances</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Basic_Salary__c</field>
+            <value>
+                <elementReference>Loop_Through_Active_Employees.Salary__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Bonus__c</field>
+            <value>
+                <elementReference>Payroll_Bonus</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Employee__c</field>
+            <value>
+                <elementReference>Loop_Through_Active_Employees.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>HRA__c</field>
+            <value>
+                <elementReference>Payroll_HRA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Month__c</field>
+            <value>
+                <elementReference>Current_Payroll_Month</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Other_Deductions__c</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PF__c</field>
+            <value>
+                <elementReference>Payroll_PF</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Status__c</field>
+            <value>
+                <stringValue>Pending</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Tax__c</field>
+            <value>
+                <elementReference>Payroll_Tax</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Year__c</field>
+            <value>
+                <elementReference>Payroll_Year</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Payroll__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Active_Employees</name>
+        <label>Get_Active_Employees</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Active_Employees</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Active</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Employee__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Existing_Payroll</name>
+        <label>Get Existing Payroll</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Payroll_Exists</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Employee__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Active_Employees.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Year__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Payroll_Year</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Month__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Current_Payroll_Month</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Payroll__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Active_Employees</targetReference>
+        </connector>
+        <schedule>
+            <dayOfMonthToRun>0</dayOfMonthToRun>
+            <frequency>Weekly</frequency>
+            <frequencyNumber>0</frequencyNumber>
+            <startDate>2026-08-21</startDate>
+            <startTime>23:30:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

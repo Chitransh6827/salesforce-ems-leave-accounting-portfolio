@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Charged_Balance__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Active Charged Balance</label>
+    <referenceTo>Leave_Balance__c</referenceTo>
+    <relationshipLabel>Active Leave Charges</relationshipLabel>
+    <relationshipName>Active_Leave_Charges</relationshipName>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

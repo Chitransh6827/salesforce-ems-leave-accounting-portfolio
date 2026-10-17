@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#1F5FA8</headerColor>
+        <logo>EMS_logo1</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Manage employee records, attendance, leave, payroll, and performance in one centralized, role-based system with reporting insights.</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Employee Management System</label>
+    <navType>Standard</navType>
+    <tabs>Employee__c</tabs>
+    <tabs>Department__c</tabs>
+    <tabs>Attendance__c</tabs>
+    <tabs>Leave_Request__c</tabs>
+    <tabs>Payroll__c</tabs>
+    <tabs>Performance_Review__c</tabs>
+    <tabs>Project__c</tabs>
+    <tabs>Leave_Balance__c</tabs>
+    <tabs>Holiday_Calendar__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Employee_Management_System_UtilityBar</utilityBar>
+</CustomApplication>

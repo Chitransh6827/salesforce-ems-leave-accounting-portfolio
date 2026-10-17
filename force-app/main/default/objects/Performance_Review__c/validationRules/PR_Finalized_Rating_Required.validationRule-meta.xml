@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PR_Finalized_Rating_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Review_Status__c,&quot;Finalized&quot;),
+    ISPICKVAL(Rating__c,&quot;&quot;)
+)</errorConditionFormula>
+    <errorMessage>Rating is required before finalizing the review.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ATD_Checkin_Date_Mismatch</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Check_in_Time__c)),
+    DATEVALUE(Check_in_Time__c) &lt;&gt; Date__c
+)</errorConditionFormula>
+    <errorDisplayField>Check_in_Time__c</errorDisplayField>
+    <errorMessage>Check-in time must match the attendance date.</errorMessage>
+</ValidationRule>

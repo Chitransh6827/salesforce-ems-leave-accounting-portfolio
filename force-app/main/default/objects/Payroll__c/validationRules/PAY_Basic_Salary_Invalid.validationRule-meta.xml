@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PAY_Basic_Salary_Invalid</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Basic_Salary__c)),
+    Basic_Salary__c &lt;= 0
+)</errorConditionFormula>
+    <errorDisplayField>Basic_Salary__c</errorDisplayField>
+    <errorMessage>Basic Salary must be greater than zero.</errorMessage>
+</ValidationRule>

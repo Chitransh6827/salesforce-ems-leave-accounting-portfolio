@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Employee_First_Name_Valid</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(First_Name__c)),
+    OR(
+        LEN(TRIM(First_Name__c)) &lt; 2,
+        NOT(
+            REGEX(
+                First_Name__c,
+                &quot;^[A-Za-z][A-Za-z &apos;-]*$&quot;
+            )
+        )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>First_Name__c</errorDisplayField>
+    <errorMessage>Enter a valid first name using letters, spaces, apostrophes, or hyphens.</errorMessage>
+</ValidationRule>

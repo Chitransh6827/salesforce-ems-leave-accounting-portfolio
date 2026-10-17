@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EMP_Exit_Details_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    OR(
+        ISPICKVAL(Status__c, &quot;Resigned&quot;),
+        ISPICKVAL(Status__c, &quot;Terminated&quot;)
+    ),
+    OR(
+        ISBLANK(Exit_Date__c),
+        ISPICKVAL(Exit_Reason__c, &quot;&quot;)
+    )
+)</errorConditionFormula>
+    <errorMessage>Exit Date and Exit Reason are required for resigned or terminated employees.</errorMessage>
+</ValidationRule>

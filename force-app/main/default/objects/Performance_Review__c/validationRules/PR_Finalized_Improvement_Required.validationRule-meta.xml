@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PR_Finalized_Improvement_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Review_Status__c,&quot;Finalized&quot;),
+    ISBLANK(Areas_of_Improvement__c)
+)</errorConditionFormula>
+    <errorDisplayField>Areas_of_Improvement__c</errorDisplayField>
+    <errorMessage>Areas of Improvement must be provided before finalizing the review.</errorMessage>
+</ValidationRule>
